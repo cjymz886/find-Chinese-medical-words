@@ -1,4 +1,4 @@
-# find-new-Chinese-medical-words
+# find-Chinese-medical-words
 从网上抓取的医疗语料中，以一种改进的无监督方法寻找语料库存在的词；<br>
 主要方法利用互信息熵，正向最大匹配，搜索引擎进行迭代来找词；<br>
 语料库不限领域，本实验是以医疗领域的文本；<br>
