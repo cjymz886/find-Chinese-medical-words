@@ -23,7 +23,7 @@ step5:更新词库后，重复step3，step4进行迭代，,当searh_num=0时，�
 
 方法流程图
 =
-![image](https://github.com/cjymz886/find-Chinese-medical-words/tree/master/images/process.jpg)<br>
+![image](https://github.com/cjymz886/find-Chinese-medical-words/raw/master/images/process.jpg)<br>
 
 算法公式
 =
