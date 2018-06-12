@@ -35,12 +35,13 @@ def setLogLevel(log_level):
 
 
 class MedFW(object):
-    def __init__(self,K=10.8,H=0.1,R=60,Y=5000):
+    def __init__(self,K=10.8,H=2000,R=60,Y=5000):
         self.K=K  #parameter of PMI to select stable words in step2
         self.H=H  #paramteter of top H segment words to search engine in step4
         self.R=R  #parameter of over the frequency of segment words in search engine to add dict in step4
         self.Y=Y  #parameter of the conditions for ending the iteration
-        self.seg_num=0
+        self.seg_num=0 #the number of segment corpus
+        self.search_num=0 #the number of add words to file_dict by search engine
 
     #step1: count corpus
     def medfw_s1(self):
@@ -65,13 +66,13 @@ class MedFW(object):
         t1 = time.time()
         sc=Cuting(file_corpus,file_dict,file_segment)
         self.seg_num=sc.find()
-        default_logger.debug("Segment corpus cost %.3f seconds...\n" % (time.time() - t1))
+        default_logger.debug("Segment corpuscost %.3f seconds...\n" % (time.time() - t1))
 
     #step4:use search engine to select words of segment corpus
     def medfw_s4(self,H,R,iternum):
         t1 = time.time()
-        search(file_segment,file_dict,H,R,iternum)
-        default_logger.debug("Segment corpus cost %.3f seconds...\n" % (time.time() - t1))
+        self.search_num=search(file_segment,file_dict,H,R,iternum)
+        default_logger.debug("Select words cost %.3f seconds...\n" % (time.time() - t1))
 
     def medfw(self):
         # default_logger.debug("Starting to find words and do step1...\n" )
@@ -89,25 +90,28 @@ class MedFW(object):
 
         print('-----------------------------------')
         print('step4:use search engine to select words of segment corpus')
-        self.medfw_s4(H=0.1,R=60,iternum=0)
+        self.medfw_s4(H=self.H,R=self.H,iternum=0)
 
 
         print('-----------------------------------')
         print('step5:cycling iteration')
         iter_num=1
         while True:
-            default_logger.debug("Itering %d...\n" % (iter_num))
-            t1 = time.time()
-            self.medfw_s3()
-            if self.seg_num<self.Y:
-                self.medfw_s4(H=1,R=60,iternum=iter_num)
-                default_logger.debug("Ending the iteration ...\n")
-                break
+            if self.search_num:
+                default_logger.debug("Itering %d...\n" % (iter_num))
+                t1 = time.time()
+                self.medfw_s3()
+                if self.seg_num<=self.Y:
+                    self.H=self.seg_num
+                    self.medfw_s4(H=self.H,R=self.R,iternum=iter_num)
+                    default_logger.debug("Ending the iteration ...\n")
+                    break
+                else:
+                    self.medfw_s4(H=self.H,R=self.R,iternum=iter_num)
+                    iter_num+=1
+                default_logger.debug("Itering %d cost %.3f seconds...\n " % ((iter_num-1), time.time() - t1))
             else:
-                self.medfw_s4(H=0.1,R=60,iternum=iter_num)
-                iter_num+=1
-            default_logger.debug("Itering %d cost %.3f seconds...\n " % ((iter_num-1), time.time() - t1))
-
+                break
         with codecs.open(file_dict, 'r', encoding='utf-8') as f:
             total_num=len(f.readlines())
 
@@ -118,5 +122,5 @@ class MedFW(object):
 
 
 if __name__ == '__main__':
-    md=MedFW(K=10.8,H=0.1,R=60,Y=5000)
+    md=MedFW(K=10.8,H=2000,R=60,Y=5000)
     md.medfw()

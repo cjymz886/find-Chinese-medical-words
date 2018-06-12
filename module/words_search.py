@@ -16,11 +16,13 @@ def search(file_segment,file_dict,H,R,iternum):
 
     input_data=codecs.open(file_segment,'r',encoding='utf-8')
     read_data=input_data.readlines()
-    N=int(len(read_data)*H)
+    N=len(read_data)
+    if H>N:
+        H=N
     output_data=codecs.open(file_dict,'a',encoding='utf-8')
-    n=1
+    n=0
     m=1
-    for line in read_data[:N]:
+    for line in read_data[:H]:
         line=line.rstrip()
         line=line.split('\t')
         word=line[0]
@@ -54,3 +56,4 @@ def search(file_segment,file_dict,H,R,iternum):
     print('Having add %d words to file_dict at iter_%d'%(n,iternum))
     input_data.close()
     output_data.close()
+    return n
