@@ -17,9 +17,16 @@ step2:对统计出的单字和双字的结果，使用互信熵，选择大于�
   
 step3:有了初始词库，使用正向最大匹配，对语料库进行切分，对切分出来的字串按频率排序输出并记下数量seg_num；<br>
 
-step4:对切分产生的字串按整体的百分比H=0.1进行搜索引擎（百度）,若字串是“百度百科”收录词条，将该字串作为词加入词库，或者在搜索页面的文本中出现的次数超过阈值R=60,也将该字串作为词加入词库；<br>
+step4:对切分产生的字串按频率排序，前H=2000的字串进行搜索引擎（百度）,若字串是“百度百科”收录词条，将该字串作为词加入词库，或者在搜索页面的文本中出现的次数超过阈值R=60,也将该字串作为词加入词库；<br>
 
-step5:更新词库后，重复step3，step4进行迭代,当seg_num小于设定的Y=5000,进行最后一次step4，并H设定为1.0，执行完后结束迭代，最后词库就是本程序所找的词；<br>
+step5:更新词库后，重复step3，step4进行迭代，,当searh_num=0时，结束迭代；当seg_num小于设定的Y=5000,进行最后一次step4，并H设定为H=seg_num，执行完后结束迭代，最后词库就是本程序所找的词；<br>
+
+方法流程图
+=
+
+算法公式
+=
+
 
 运行
 =
@@ -34,6 +41,7 @@ python medfw.py<br>
 
 结果样例
 =
+惶惶	org<br>
 爷爷	org<br>
 曼佗	org<br>
 垮垮	org<br>
@@ -46,17 +54,23 @@ python medfw.py<br>
 铒翠	org<br>
 诚挚	org<br>
 迪厅	org<br>
-不足	iter_1<br>
-知情同意书	iter_1<br>
-美辛	iter_1<br>
-运动	iter_1<br>
-状态	iter_1<br>
-瘢痕	iter_1<br>
-心悸	iter_1<br>
-步态	iter_1<br>
-祸首	iter_1<br>
-照相	iter_1<br>
-形成	iter_1<br>
-面容	iter_1<br>
-先天	iter_1<br>
-动作	iter_1<br>
+不足	iter_0<br>
+知情同意书	iter_0<br>
+运动	iter_0<br>
+状态	iter_0<br>
+瘢痕	iter_0<br>
+心悸	iter_0<br>
+步态	iter_0<br>
+祸首	iter_0<br>
+照相	iter_0<br>
+形成	iter_0<br>
+面容	iter_0<br>
+先天	iter_0<br>
+动作	iter_0<br>
+由于	iter_0<br>
+价格	iter_0<br>
+行为	iter_0<br>
+淋病	iter_0<br>
+包括	iter_0<br>
+栓塞	iter_0<br>
+球感	iter_0<br>
