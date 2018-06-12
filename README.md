@@ -27,7 +27,11 @@ step5:更新词库后，重复step3，step4进行迭代，,当searh_num=0时，�
 
 算法公式
 =
+![image](https://github.com/cjymz886/find-Chinese-medical-words/raw/master/images/q1.jpg)<br>
 
+![image](https://github.com/cjymz886/find-Chinese-medical-words/raw/master/images/q2.jpg)<br>
+
+![image](https://github.com/cjymz886/find-Chinese-medical-words/raw/master/images/q3.jpg)<br>
 
 运行
 =
