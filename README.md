@@ -21,11 +21,11 @@ step4:对切分产生的字串按频率排序，前H=2000的字串进行搜索�
 
 step5:更新词库后，重复step3，step4进行迭代，,当searh_num=0时，结束迭代；当seg_num小于设定的Y=5000,进行最后一次step4，并H设定为H=seg_num，执行完后结束迭代，最后词库就是本程序所找的词；<br>
 
-方法流程图
+流程图
 =
 ![image](https://github.com/cjymz886/find-Chinese-medical-words/raw/master/images/process.jpg)<br>
 
-算法公式
+算法
 =
 ![image](https://github.com/cjymz886/find-Chinese-medical-words/raw/master/images/q1.jpg)<br>
 
