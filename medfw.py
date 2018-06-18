@@ -7,7 +7,6 @@ import logging
 import time
 import codecs
 
-from module._compat import *
 from module.corpus_count import *
 from module.corpus_segment import *
 from module.select_model import *
