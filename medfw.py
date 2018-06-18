@@ -3,7 +3,6 @@ __version__ = '1.0'
 __license__ = 'MIT'
 
 import os
-import re
 import logging
 import time
 import codecs
