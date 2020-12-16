@@ -6,6 +6,7 @@ import os
 import logging
 import time
 import codecs
+import sys
 
 from module.corpus_count import *
 from module.corpus_segment import *
